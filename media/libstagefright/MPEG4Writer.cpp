@@ -3195,6 +3195,9 @@ void MPEG4Writer::Track::writeMp4vEsdsBox() {
 
     mOwner->beginBox("esds");
 
+    // Make sure all sizes encode to a single byte.
+    CHECK_LT(mCodecSpecificDataSize + 23, 128);
+
     mOwner->writeInt32(0);    // version=0, flags=0
 
     mOwner->writeInt8(0x03);  // ES_DescrTag
