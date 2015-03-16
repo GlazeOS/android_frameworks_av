@@ -65,6 +65,7 @@ static const float kTypicalDisplayRefreshingRate = 60.f;
 // display refresh rate drops on battery saver
 static const float kMinTypicalDisplayRefreshingRate = kTypicalDisplayRefreshingRate / 2;
 static const int kMaxNumVideoTemporalLayers = 8;
+static const int64_t kMax32BitFileSize = 0x00ffffffffLL; // 4GB
 
 // To collect the encoder usage for the battery app
 static void addBatteryData(uint32_t params) {
@@ -460,6 +461,10 @@ status_t StagefrightRecorder::setParamMaxFileSizeBytes(int64_t bytes) {
     }
 
     mMaxFileSizeBytes = bytes;
+
+    // If requested size is >4GB, force 64-bit offsets
+    mUse64BitFileOffset |= (bytes >= kMax32BitFileSize);
+
     return OK;
 }
 
