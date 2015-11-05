@@ -155,6 +155,7 @@ private:
     bool mSailed;  // configuration is set (no more meta-mode changes)
     bool mQueriedProhibitedExtensions;
     SortedVector<OMX_INDEXTYPE> mProhibitedExtensions;
+    atomic_bool mDying;
     bool mIsSecure;
 
     // Lock only covers mGraphicBufferSource.  We can't always use mLock
