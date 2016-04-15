@@ -2457,6 +2457,8 @@ status_t MPEG4Writer::Track::threadEntry() {
             continue;
         }
 
+        ++nActualFrames;
+
         MediaBuffer *copy = NULL;
         // Check if the upstream source hints it is OK to hold on to the
         // buffer without releasing immediately and avoid cloning the buffer
