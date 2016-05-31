@@ -46,6 +46,13 @@ struct AVMediaUtils {
     virtual size_t AudioTrackGetOffloadFrameCount(size_t frameCount) {
         return frameCount;
     }
+
+    virtual void writeCustomParamData(
+        int , const void *, size_t, Parcel *) {}
+
+    virtual void readCustomParamData(
+        int , void *, size_t, const Parcel *) {}
+
     // ----- NO TRESSPASSING BEYOND THIS LINE ------
     DECLARE_LOADABLE_SINGLETON(AVMediaUtils);
 };
