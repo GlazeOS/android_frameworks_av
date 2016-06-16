@@ -2450,6 +2450,12 @@ status_t MPEG4Writer::Track::threadEntry() {
                 }
             }
 
+            if (!mIsAudio) {
+                int32_t fps;
+                mMeta->findInt32(kKeyFrameRate, &fps);
+                int64_t cttsOffsetTimeUs = 1000000LL/fps;
+                mCttsOffsetTimeUs = cttsOffsetTimeUs + kMinCttsOffsetTimeUs; //delta factor
+            }
             buffer->release();
             buffer = NULL;
 
